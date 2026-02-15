@@ -1,7 +1,77 @@
-export default function components() {
+"use client";
+
+import { useState, useRef } from "react";
+
+const sections = [
+  { id: "buttons", label: "Buttons" },
+  { id: "input-fields", label: "Input Fields" },
+  { id: "toasts", label: "Toasts" },
+];
+
+export default function Components() {
+  const [search, setSearch] = useState("");
+  const [active, setActive] = useState(sections[0].id);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const filtered = sections.filter((s) =>
+    s.label.toLowerCase().includes(search.toLowerCase()),
+  );
+
+  const scrollTo = (id: string) => {
+    setActive(id);
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
-    <div>
-      <h1>components</h1>
+    <div className="flex h-screen bg-gray-50 text-gray-900">
+      {/* Sidebar */}
+      <aside className="w-72 border-r border-gray-200 bg-white flex flex-col shrink-0">
+        <div className="p-4 border-b border-gray-200">
+          <h1 className="text-lg font-semibold">Components</h1>
+        </div>
+
+        <div className="p-3">
+          <input
+            type="text"
+            placeholder="Search..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg outline-none focus:border-gray-400"
+          />
+        </div>
+
+        <nav className="flex-1 overflow-y-auto px-2 pb-4">
+          {filtered.map((s) => (
+            <button
+              key={s.id}
+              onClick={() => scrollTo(s.id)}
+              className={`w-full text-left px-3 py-2 text-sm rounded-lg mb-0.5 ${active === s.id
+                  ? "bg-gray-100 font-medium text-gray-900"
+                  : "text-gray-600 hover:bg-gray-50"
+                }`}
+            >
+              {s.label}
+            </button>
+          ))}
+          {filtered.length === 0 && (
+            <p className="text-sm text-gray-400 px-3 py-2">No results</p>
+          )}
+        </nav>
+      </aside>
+
+      {/* Content */}
+      <main ref={contentRef} className="flex-1 overflow-y-auto p-8">
+        {filtered.map((s) => (
+          <section key={s.id} id={s.id} className="mb-12">
+            <h2 className="text-xl font-semibold mb-4 pb-2 border-b border-gray-200">
+              {s.label}
+            </h2>
+            <div className="rounded-lg border border-dashed border-gray-300 bg-white p-8 flex items-center justify-center min-h-[120px]">
+              <p className="text-sm text-gray-400">No components added yet</p>
+            </div>
+          </section>
+        ))}
+      </main>
     </div>
   );
 }
