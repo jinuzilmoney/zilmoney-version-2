@@ -42,11 +42,10 @@ export default function Components() {
             <button
               key={s.id}
               onClick={() => setActive(s.id)}
-              className={`w-full text-left px-3 py-2 text-sm rounded-lg mb-0.5 ${
-                active === s.id
+              className={`w-full text-left px-3 py-2 text-sm rounded-lg mb-0.5 ${active === s.id
                   ? "bg-gray-100 font-medium text-gray-900"
                   : "text-gray-600 hover:bg-gray-50"
-              }`}
+                }`}
             >
               {s.label}
             </button>
