@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { RectangleHorizontal, TextCursorInput, Bell } from "lucide-react";
-import { ButtonShowcase } from "./ButtonShowcase";
+import ButtonShowcase from "./ButtonShowcase";
 import { InputFieldsShowcase } from "./InputFieldsShowcase";
 import { ToastShowcase } from "./ToastShowcase";
 

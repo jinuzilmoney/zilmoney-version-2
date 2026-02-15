@@ -1,4 +1,3 @@
-export { ButtonBase, type ButtonBaseProps, type ButtonSize } from './button';
 export { PrimaryButton } from './primary';
 export { SecondaryButton } from './secondary';
 export { GhostButton } from './ghost';

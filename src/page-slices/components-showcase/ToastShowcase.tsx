@@ -1,37 +1,33 @@
 "use client";
 
 import { useToast } from "@/src/shared/ui/toast";
-import { Button } from "@/src/shared/ui/button";
+import { PrimaryButton,SecondaryButton } from "@/src/shared/ui/button";
 
 export function ToastShowcase() {
   const { success, error, warning, info } = useToast();
 
   return (
     <div className="flex flex-wrap gap-3">
-      <Button
+      <PrimaryButton
         onClick={() => success("Success", "Action completed successfully!")}
-        variant="secondary"
       >
         Success
-      </Button>
-      <Button
+      </PrimaryButton>
+      <SecondaryButton
         onClick={() => error("Error", "Something went wrong!")}
-        variant="secondary"
       >
         Error
-      </Button>
-      <Button
+      </SecondaryButton>
+      <SecondaryButton
         onClick={() => warning("Warning", "Please check your input.")}
-        variant="secondary"
       >
         Warning
-      </Button>
-      <Button
+      </SecondaryButton>
+      <SecondaryButton
         onClick={() => info("Info", "Here is some info for you.")}
-        variant="secondary"
       >
         Info
-      </Button>
+      </SecondaryButton>
     </div>
   );
 }
