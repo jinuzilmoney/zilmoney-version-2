@@ -1,20 +1,41 @@
-"use client";
+'use client';
+
+import {
+  PrimaryButton,
+  SecondaryButton,
+  GhostButton,
+  GlassButton,
+  OutlineButton,
+  DestructiveButton,
+  NeonButton,
+} from './index';
 
 export default function ButtonShowcase() {
   return (
-    <div className="flex flex-wrap gap-3">
-      <button className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700">
-        Primary
-      </button>
-      <button className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50">
-        Secondary
-      </button>
-      <button className="px-4 py-2 text-sm font-medium text-white bg-red-600 rounded-lg hover:bg-red-700">
-        Danger
-      </button>
-      <button className="px-4 py-2 text-sm font-medium text-gray-400 bg-gray-100 rounded-lg cursor-not-allowed" disabled>
-        Disabled
-      </button>
+    <div className="space-y-6">
+      <div>
+        <h3 className="text-sm font-medium text-gray-500 mb-3">Variants</h3>
+        <div className="flex flex-wrap gap-3">
+          <PrimaryButton tooltip="Primary action" onClick={() => alert('Primary clicked')}>primary</PrimaryButton>
+          <SecondaryButton tooltip="Secondary action" onClick={() => alert('Secondary clicked')}>secondary</SecondaryButton>
+          <GhostButton tooltip="Ghost action" onClick={() => alert('Ghost clicked')}>ghost</GhostButton>
+          <GlassButton tooltip="Glass action" onClick={() => alert('Glass clicked')}>glass</GlassButton>
+          <OutlineButton tooltip="Outline action" onClick={() => alert('Outline clicked')}>outline</OutlineButton>
+          <DestructiveButton tooltip="Destructive action" onClick={() => alert('Destructive clicked')}>destructive</DestructiveButton>
+          <NeonButton tooltip="Neon action" onClick={() => alert('Neon clicked')}>neon</NeonButton>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-sm font-medium text-gray-500 mb-3">Sizes</h3>
+        <div className="flex flex-wrap items-center gap-3">
+          <PrimaryButton size="sm" tooltip="Small button">Size sm</PrimaryButton>
+          <PrimaryButton size="md" tooltip="Medium button">Size md</PrimaryButton>
+          <PrimaryButton size="lg" tooltip="Large button">Size lg</PrimaryButton>
+          <PrimaryButton size="icon" tooltip="Icon button">Q</PrimaryButton>
+          <PrimaryButton disabled tooltip="This button is disabled">Disabled</PrimaryButton>
+        </div>
+      </div>
     </div>
   );
 }
