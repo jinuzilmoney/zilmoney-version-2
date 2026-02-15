@@ -1,6 +1,6 @@
 "use client";
 
-import { TextInput, TextArea, NumberInput, EmailInput, PasswordInput } from "@/src/shared/ui/input";
+import { TextInput, TextArea, NumberInput, EmailInput, PasswordInput, Dropdown } from "@/src/shared/ui/input";
 
 export function InputFieldsShowcase() {
   return (
@@ -10,6 +10,14 @@ export function InputFieldsShowcase() {
       <NumberInput placeholder="Number input..." />
       <EmailInput placeholder="Email input..." />
       <PasswordInput placeholder="Password input..." />
+      <Dropdown
+        placeholder="Select category type..."
+        options={[
+          { label: "Income", value: "income" },
+          { label: "Expense", value: "expense" },
+        ]}
+        
+      />
     </div>
   );
 }
