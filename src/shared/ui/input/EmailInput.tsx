@@ -1,24 +1,19 @@
-"use client";
+import React from "react";
 
-import { forwardRef } from "react";
-import { Input, InputProps } from "./Input";
-
-export interface EmailInputProps extends Omit<InputProps, "type"> {
-  autoComplete?: string;
+export interface EmailInputProps extends React.ComponentProps<"input"> {
+  error?: string;
 }
 
-export const EmailInput = forwardRef<HTMLInputElement, EmailInputProps>(
-  ({ autoComplete = "email", ...props }, ref) => {
-    return (
-      <Input
-        ref={ref}
-        type="email"
-        autoComplete={autoComplete}
-        placeholder="you@example.com"
+export function EmailInput({ className = "", error, ...props }: EmailInputProps) {
+  return (
+    <div className="w-full">
+      <input
+        type="text"
+        inputMode="email"
+        className={`flex h-11 min-h-[44px] w-full rounded-xl border ${error ? "border-red-500" : "border-gray-200"} bg-white px-4 py-3 text-base text-gray-900 shadow-sm transition-all duration-200 placeholder:text-gray-400 hover:border-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20319D] focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm md:py-2 ${className}`}
         {...props}
       />
-    );
-  }
-);
-
-EmailInput.displayName = "EmailInput";
+      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+    </div>
+  );
+}
