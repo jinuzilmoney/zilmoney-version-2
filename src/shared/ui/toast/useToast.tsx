@@ -1,11 +1,15 @@
 "use client";
 
 import { createContext, useContext, useState, useCallback } from "react";
-import Toast, {
-  type ToastType,
-  type ToastPosition,
-  type ToastAction,
-} from "./Toast";
+import { Toast, type ToastType, type ToastAction } from "./Toast";
+
+export type ToastPosition =
+  | "top-right"
+  | "top-left"
+  | "bottom-right"
+  | "bottom-left"
+  | "top-center"
+  | "bottom-center";
 
 interface ToastItem {
   id: string;
@@ -41,10 +45,18 @@ const positionStyles: Record<ToastPosition, string> = {
 
 const MAX_TOASTS = 5;
 
-export function ToastProvider({ children }: { children: React.ReactNode }) {
+export function ToastContainer({
+  children,
+  initialPosition = "top-right",
+  initialDuration = 5000,
+}: {
+  children: React.ReactNode;
+  initialPosition?: ToastPosition;
+  initialDuration?: number;
+}) {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
-  const [position, setPosition] = useState<ToastPosition>("top-right");
-  const [defaultDuration, setDefaultDuration] = useState(5000);
+  const [position, setPosition] = useState<ToastPosition>(initialPosition);
+  const [defaultDuration, setDefaultDuration] = useState(initialDuration);
 
   const dismiss = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
@@ -75,7 +87,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 
       return id;
     },
-    [defaultDuration, dismiss],
+    [defaultDuration, dismiss]
   );
 
   const contextValue: ToastContextValue = {
@@ -116,7 +128,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
 export function useToast() {
   const context = useContext(ToastContext);
   if (!context) {
-    throw new Error("useToast must be used within a ToastProvider");
+    throw new Error("useToast must be used within a ToastContainer");
   }
 
   const {
@@ -135,9 +147,9 @@ export function useToast() {
       description?: string,
       options?: Partial<
         Omit<ToastItem, "id" | "type" | "title" | "description">
-      >,
+      >
     ) => toast({ type: "error", title, description, ...options }),
-    [toast],
+    [toast]
   );
 
   const warning = useCallback(
@@ -146,9 +158,9 @@ export function useToast() {
       description?: string,
       options?: Partial<
         Omit<ToastItem, "id" | "type" | "title" | "description">
-      >,
+      >
     ) => toast({ type: "warning", title, description, ...options }),
-    [toast],
+    [toast]
   );
 
   const info = useCallback(
@@ -157,9 +169,9 @@ export function useToast() {
       description?: string,
       options?: Partial<
         Omit<ToastItem, "id" | "type" | "title" | "description">
-      >,
+      >
     ) => toast({ type: "info", title, description, ...options }),
-    [toast],
+    [toast]
   );
 
   const success = useCallback(
@@ -168,9 +180,9 @@ export function useToast() {
       description?: string,
       options?: Partial<
         Omit<ToastItem, "id" | "type" | "title" | "description">
-      >,
+      >
     ) => toast({ type: "success", title, description, ...options }),
-    [toast],
+    [toast]
   );
 
   return {

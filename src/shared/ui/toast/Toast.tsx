@@ -4,14 +4,6 @@ import { useState, useEffect } from "react";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
-export type ToastPosition =
-  | "top-right"
-  | "top-left"
-  | "bottom-right"
-  | "bottom-left"
-  | "top-center"
-  | "bottom-center";
-
 export interface ToastAction {
   label: string;
   onClick: () => void;
@@ -52,7 +44,7 @@ const icons: Record<ToastType, string> = {
   info: "ℹ",
 };
 
-export default function Toast({
+export function Toast({
   id,
   type,
   title,
