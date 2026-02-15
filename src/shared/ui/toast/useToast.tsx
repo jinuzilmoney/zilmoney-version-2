@@ -47,7 +47,7 @@ const MAX_TOASTS = 5;
 
 export function ToastContainer({
   children,
-  initialPosition = "top-right",
+  initialPosition = "bottom-right",
   initialDuration = 5000,
 }: {
   children: React.ReactNode;
