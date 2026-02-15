@@ -1,7 +1,6 @@
 'use client';
 
 import { forwardRef } from 'react';
-import { motion, type MotionProps } from 'framer-motion';
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'glass' | 'outline' | 'destructive' | 'neon';
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
 
@@ -12,7 +11,7 @@ import { twMerge } from "tailwind-merge"
  function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
-export interface ButtonBaseProps extends Omit<MotionProps, 'ref'> {
+export interface ButtonBaseProps {
   size?: ButtonSize;
   children?: React.ReactNode;
   className?: string;
@@ -53,7 +52,7 @@ const sizeStyles: Record<ButtonSize, string> = {
 export const ButtonBase = forwardRef<HTMLButtonElement, InternalButtonProps>(
   ({ className, variant, size = 'md', children, disabled, tooltip, ...props }, ref) => {
     const button = (
-      <motion.button
+      <button
         ref={ref}
         disabled={disabled}
         className={cn(
@@ -62,13 +61,10 @@ export const ButtonBase = forwardRef<HTMLButtonElement, InternalButtonProps>(
           sizeStyles[size],
           className
         )}
-        whileHover={{ scale: disabled ? 1 : 1.02 }}
-        whileTap={{ scale: disabled ? 1 : 0.98 }}
-        transition={{ type: 'spring', stiffness: 400, damping: 17 }}
         {...props}
       >
         {children}
-      </motion.button>
+      </button>
     );
 
     if (tooltip) {
