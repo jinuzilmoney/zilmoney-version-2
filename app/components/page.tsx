@@ -1,14 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import { RectangleHorizontal, TextCursorInput, Bell } from "lucide-react";
 import ButtonShowcase from "@/src/components/common-components/button-components/ButtonShowcase";
 import InputFieldsShowcase from "@/src/components/common-components/input-fields-components/InputFieldsShowcase";
 import ToastShowcase from "@/src/components/common-components/toast-components/ToastShowcase";
 
 const sections = [
-  { id: "buttons", label: "Buttons" },
-  { id: "input-fields", label: "Input Fields" },
-  { id: "toasts", label: "Toasts" },
+  { id: "buttons", label: "Buttons", icon: RectangleHorizontal },
+  { id: "input-fields", label: "Input Fields", icon: TextCursorInput },
+  { id: "toasts", label: "Toasts", icon: Bell },
 ];
 
 export default function Components() {
@@ -42,11 +43,13 @@ export default function Components() {
             <button
               key={s.id}
               onClick={() => setActive(s.id)}
-              className={`w-full text-left px-3 py-2 text-sm rounded-lg mb-0.5 ${active === s.id
+              className={`w-full text-left px-3 py-2 text-sm rounded-lg mb-0.5 flex items-center gap-2 ${
+                active === s.id
                   ? "bg-gray-100 font-medium text-gray-900"
                   : "text-gray-600 hover:bg-gray-50"
-                }`}
+              }`}
             >
+              <s.icon size={16} />
               {s.label}
             </button>
           ))}
