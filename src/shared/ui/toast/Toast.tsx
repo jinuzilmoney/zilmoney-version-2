@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { X, AlertTriangle, Info, CheckCircle2, XCircle } from "lucide-react";
 
 export type ToastType = "success" | "error" | "warning" | "info";
 
@@ -21,28 +22,54 @@ export interface ToastProps {
 
 const toastStyles: Record<
   ToastType,
-  { bg: string; border: string; icon: string }
+  { bg: string; border: string; icon: string; iconBg: string }
 > = {
-  success: {
-    bg: "bg-green-50",
-    border: "border-green-200",
-    icon: "text-green-600",
+  error: {
+    bg: "bg-red-50",
+    border: "border-red-200",
+    icon: "text-red-600",
+    iconBg: "bg-red-100",
   },
-  error: { bg: "bg-red-50", border: "border-red-200", icon: "text-red-600" },
   warning: {
     bg: "bg-yellow-50",
     border: "border-yellow-200",
     icon: "text-yellow-600",
+    iconBg: "bg-yellow-100",
   },
-  info: { bg: "bg-blue-50", border: "border-blue-200", icon: "text-blue-600" },
+  info: {
+    bg: "bg-blue-50",
+    border: "border-blue-200",
+    icon: "text-blue-600",
+    iconBg: "bg-blue-100",
+  },
+  success: {
+    bg: "bg-green-50",
+    border: "border-green-200",
+    icon: "text-green-600",
+    iconBg: "bg-green-100",
+  },
 };
 
-const icons: Record<ToastType, string> = {
-  success: "✓",
-  error: "✕",
-  warning: "⚠",
-  info: "ℹ",
-};
+function ToastIcon({
+  type,
+  className,
+}: {
+  type: ToastType;
+  className?: string;
+}) {
+  const iconProps = { size: 18, className };
+
+  switch (type) {
+    case "error":
+      return <XCircle {...iconProps} />;
+    case "warning":
+      return <AlertTriangle {...iconProps} />;
+    case "info":
+      return <Info {...iconProps} />;
+    case "success":
+      return <CheckCircle2 {...iconProps} />;
+  }
+}
 
 export function Toast({
   id,
@@ -62,16 +89,20 @@ export function Toast({
 
   return (
     <div
-      className={`flex items-start gap-3 w-[360px] max-w-[calc(100vw-2rem)] p-4 rounded-xl border-2 shadow-lg transition-all duration-300 ${styles.bg} ${styles.border} ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"}`}
+      className={`relative flex items-start gap-3 w-[360px] max-w-[calc(100vw-2rem)] p-4 rounded-xl border-2 shadow-lg transition-all duration-300 ${styles.bg} ${styles.border} ${visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"}`}
     >
-      <span className={`text-base font-bold ${styles.icon}`}>
-        {icons[type]}
-      </span>
+      {/* Icon */}
+      <div className={`flex-shrink-0 p-1.5 rounded-lg ${styles.iconBg}`}>
+        <ToastIcon type={type} className={styles.icon} />
+      </div>
 
+      {/* Content */}
       <div className="flex-1 min-w-0">
         <p className="text-sm font-semibold text-gray-900">{title}</p>
         {description && (
-          <p className="mt-1 text-xs text-gray-600">{description}</p>
+          <p className="mt-1 text-xs text-gray-600 leading-relaxed">
+            {description}
+          </p>
         )}
         {action && (
           <button
@@ -83,12 +114,14 @@ export function Toast({
         )}
       </div>
 
+      {/* Close Button */}
       {dismissible && onDismiss && (
         <button
           onClick={() => onDismiss(id)}
-          className="p-1 rounded-lg hover:bg-black/5 text-gray-500 text-sm"
+          className="flex-shrink-0 p-1 rounded-lg hover:bg-black/5 transition-colors"
+          aria-label="Dismiss notification"
         >
-          ✕
+          <X size={16} className="text-gray-500" />
         </button>
       )}
     </div>
