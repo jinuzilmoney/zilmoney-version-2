@@ -1,6 +1,9 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState } from "react";
+import ButtonShowcase from "@/src/components/common-components/button-components/ButtonShowcase";
+import InputFieldsShowcase from "@/src/components/common-components/input-fields-components/InputFieldsShowcase";
+import ToastShowcase from "@/src/components/common-components/toast-components/ToastShowcase";
 
 const sections = [
   { id: "buttons", label: "Buttons" },
@@ -11,16 +14,10 @@ const sections = [
 export default function Components() {
   const [search, setSearch] = useState("");
   const [active, setActive] = useState(sections[0].id);
-  const contentRef = useRef<HTMLDivElement>(null);
 
   const filtered = sections.filter((s) =>
     s.label.toLowerCase().includes(search.toLowerCase()),
   );
-
-  const scrollTo = (id: string) => {
-    setActive(id);
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
-  };
 
   return (
     <div className="flex h-screen bg-gray-50 text-gray-900">
@@ -44,11 +41,12 @@ export default function Components() {
           {filtered.map((s) => (
             <button
               key={s.id}
-              onClick={() => scrollTo(s.id)}
-              className={`w-full text-left px-3 py-2 text-sm rounded-lg mb-0.5 ${active === s.id
+              onClick={() => setActive(s.id)}
+              className={`w-full text-left px-3 py-2 text-sm rounded-lg mb-0.5 ${
+                active === s.id
                   ? "bg-gray-100 font-medium text-gray-900"
                   : "text-gray-600 hover:bg-gray-50"
-                }`}
+              }`}
             >
               {s.label}
             </button>
@@ -60,17 +58,19 @@ export default function Components() {
       </aside>
 
       {/* Content */}
-      <main ref={contentRef} className="flex-1 overflow-y-auto p-8">
-        {filtered.map((s) => (
-          <section key={s.id} id={s.id} className="mb-12">
-            <h2 className="text-xl font-semibold mb-4 pb-2 border-b border-gray-200">
-              {s.label}
-            </h2>
-            <div className="rounded-lg border border-dashed border-gray-300 bg-white p-8 flex items-center justify-center min-h-[120px]">
-              <p className="text-sm text-gray-400">No components added yet</p>
-            </div>
-          </section>
-        ))}
+      <main className="flex-1 overflow-y-auto p-8">
+        {filtered
+          .filter((s) => s.id === active)
+          .map((s) => (
+            <section key={s.id}>
+              <h2 className="text-xl font-semibold mb-4 pb-2 border-b border-gray-200">
+                {s.label}
+              </h2>
+              {s.id === "buttons" && <ButtonShowcase />}
+              {s.id === "input-fields" && <InputFieldsShowcase />}
+              {s.id === "toasts" && <ToastShowcase />}
+            </section>
+          ))}
       </main>
     </div>
   );
