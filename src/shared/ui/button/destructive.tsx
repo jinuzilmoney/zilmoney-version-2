@@ -1,7 +1,7 @@
 'use client';
 
 import { forwardRef } from 'react';
-import { ButtonBase, type ButtonBaseProps } from './button';
+import { ButtonBase, type ButtonBaseProps } from './Button';
 
 export const DestructiveButton = forwardRef<HTMLButtonElement, ButtonBaseProps>(
   (props, ref) => {
