@@ -17,3 +17,4 @@ This folder stores **top-level documentation** related to the project. Use this 
 - Keep documents focused on a single topic
 - Update docs when the related code changes
 - This is NOT for feature-specific documentation — use `docs/feature-level-docs/` for that
+
