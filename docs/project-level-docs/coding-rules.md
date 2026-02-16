@@ -11,3 +11,7 @@ Rules that every team member must follow before pushing code.
 ## Before Pushing
 
 4. **Sync your branch with the `dev` branch**. Pull the latest changes from `dev` and merge/rebase into your branch before pushing. Resolve any merge conflicts locally to keep the remote branch clean.
+
+## Code Quality
+
+5. **Keep files small (max 500–700 lines)**. If a component or file exceeds this limit, break it into smaller sub-components or utility files. Large files are harder to read, review, and maintain.
