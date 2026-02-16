@@ -5,12 +5,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'glass' | 'outli
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
 
 
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
-
- function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
+import { cn } from "@/src/shared/lib/utils";
 export interface ButtonBaseProps {
   size?: ButtonSize;
   children?: React.ReactNode;
