@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Funnel_Display, Plus_Jakarta_Sans } from "next/font/google";
 import { ThemeProvider, ToastProvider } from "@/src/app/providers";
+import { FloatingThemeToggle } from "@/src/shared/ui/theme-toggle";
 import "./globals.css";
 
 const funnelDisplay = Funnel_Display({
@@ -34,6 +35,7 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <ToastProvider>{children}</ToastProvider>
+          <FloatingThemeToggle />
         </ThemeProvider>
       </body>
     </html>
