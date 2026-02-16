@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { X, Download, ArrowDown } from 'lucide-react';
-import { ButtonBase } from '@/src/shared/ui/button/Button';
+import { useState, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Download, ArrowDown } from "lucide-react";
+import { ButtonBase } from "@/src/shared/ui/button/Button";
 
 interface ESignatureModalProps {
   isOpen: boolean;
@@ -84,7 +84,11 @@ Email: support@zilmoney.com / support@onlinecheckwriter.com
 By accepting this Agreement, you affirm that you have carefully read and fully understood all the terms herein, and you hereby provide your explicit consent to conduct transactions and communications with Zil Money electronically, utilizing electronic signatures. Additionally, you confirm that you possess the necessary hardware and software capabilities to access, view, and retain electronic communications effectively. Your acceptance of this Agreement and consent to electronic transactions signify your agreement to be bound by its provisions. It is imperative that you acknowledge the legal validity and enforceability of E-Signatures and communications, as per the terms specified herein.
 `;
 
-export function ESignatureModal({ isOpen, onClose, onAgree }: ESignatureModalProps) {
+export function ESignatureModal({
+  isOpen,
+  onClose,
+  onAgree,
+}: ESignatureModalProps) {
   const [hasScrolledToBottom, setHasScrolledToBottom] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
@@ -109,11 +113,11 @@ export function ESignatureModal({ isOpen, onClose, onAgree }: ESignatureModalPro
   };
 
   const handleDownload = () => {
-    const blob = new Blob([AGREEMENT_TEXT], { type: 'text/plain' });
+    const blob = new Blob([AGREEMENT_TEXT], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
+    const link = document.createElement("a");
     link.href = url;
-    link.download = 'Zil-Money-E-Signature-Agreement.txt';
+    link.download = "Zil-Money-E-Signature-Agreement.txt";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -166,47 +170,80 @@ export function ESignatureModal({ isOpen, onClose, onAgree }: ESignatureModalPro
 
               <div className="space-y-4 text-sm text-gray-700 leading-relaxed">
                 <p>
-                  This E-Signature Agreement or E-Signature Disclosure (hereinafter referred to as the &quot;E-Signature Agreement&quot; or &quot;Agreement&quot;) is entered into between you (&quot;Customer&quot;) and Zil Money Corporation (&quot;Zil Money&quot; or &quot;the Company&quot;). By accepting this Agreement, you agree to conduct transactions and communications electronically, in accordance with the guidelines set forth in the E-COMMUNICATIONS AND E-SIGNATURE DISCLOSURE POLICIES AND PROCEDURES MANUAL of Zil Money, as well as the terms outlined in this Agreement below.
+                  This E-Signature Agreement or E-Signature Disclosure
+                  (hereinafter referred to as the &quot;E-Signature
+                  Agreement&quot; or &quot;Agreement&quot;) is entered into
+                  between you (&quot;Customer&quot;) and Zil Money Corporation
+                  (&quot;Zil Money&quot; or &quot;the Company&quot;). By
+                  accepting this Agreement, you agree to conduct transactions
+                  and communications electronically, in accordance with the
+                  guidelines set forth in the E-COMMUNICATIONS AND E-SIGNATURE
+                  DISCLOSURE POLICIES AND PROCEDURES MANUAL of Zil Money, as
+                  well as the terms outlined in this Agreement below.
                 </p>
 
-                <h4 className="text-base font-bold text-[#0595E5] pt-2">Agreement:</h4>
+                <h4 className="text-base font-bold text-[#0595E5] pt-2">
+                  Agreement:
+                </h4>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">1. Scope of E-Signature</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    1. Scope of E-Signature
+                  </h5>
                   <p className="mt-1">
-                    The use of electronic signature (&quot;E-Signature&quot;) under this Agreement applies to all electronic communications, agreements, disclosures, and notices exchanged between the Customer and Zil Money.
+                    The use of electronic signature (&quot;E-Signature&quot;)
+                    under this Agreement applies to all electronic
+                    communications, agreements, disclosures, and notices
+                    exchanged between the Customer and Zil Money.
                   </p>
                   <ul className="mt-2 space-y-1 ml-4">
                     <li>(a) Signing and executing contracts and agreements.</li>
                     <li>(b) Authorizing financial transactions.</li>
-                    <li>(c) Acknowledging receipt of disclosures and notices.</li>
-                    <li>(d) Providing consent for electronic delivery of documents.</li>
+                    <li>
+                      (c) Acknowledging receipt of disclosures and notices.
+                    </li>
+                    <li>
+                      (d) Providing consent for electronic delivery of
+                      documents.
+                    </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">2. Consent to Electronic Transactions</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    2. Consent to Electronic Transactions
+                  </h5>
                   <p className="mt-1">
-                    By accepting this Agreement, you consent to conduct transactions electronically.
+                    By accepting this Agreement, you consent to conduct
+                    transactions electronically.
                   </p>
                   <ul className="mt-2 space-y-1 ml-4">
-                    <li>(a) Receiving and reviewing documents electronically.</li>
+                    <li>
+                      (a) Receiving and reviewing documents electronically.
+                    </li>
                     <li>(b) Signing documents using an E-Signature.</li>
                     <li>(c) Storing documents electronically.</li>
                   </ul>
                 </div>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">3. Electronic Delivery of Disclosures</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    3. Electronic Delivery of Disclosures
+                  </h5>
                   <p className="mt-1">
-                    You agree to receive all disclosures, notices, and communications electronically.
+                    You agree to receive all disclosures, notices, and
+                    communications electronically.
                   </p>
                 </div>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">4. Hardware and Software Requirements</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    4. Hardware and Software Requirements
+                  </h5>
                   <ul className="mt-2 space-y-1 ml-4">
-                    <li>(a) A computer or mobile device with internet access.</li>
+                    <li>
+                      (a) A computer or mobile device with internet access.
+                    </li>
                     <li>(b) An email account and access to your email.</li>
                     <li>(c) A web browser that supports secure connections.</li>
                     <li>(d) Software capable of viewing PDF files.</li>
@@ -214,53 +251,85 @@ export function ESignatureModal({ isOpen, onClose, onAgree }: ESignatureModalPro
                 </div>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">5. Consent to Use E-Signature</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    5. Consent to Use E-Signature
+                  </h5>
                   <ul className="mt-2 space-y-1 ml-4">
-                    <li>(a) Consent to use E-Signature for all transactions and communications with Zil Money.</li>
-                    <li>(b) Acknowledge that your E-Signature has the same legal effect as a handwritten signature.</li>
-                    <li>(c) Agree to be bound by any documents you sign electronically.</li>
+                    <li>
+                      (a) Consent to use E-Signature for all transactions and
+                      communications with Zil Money.
+                    </li>
+                    <li>
+                      (b) Acknowledge that your E-Signature has the same legal
+                      effect as a handwritten signature.
+                    </li>
+                    <li>
+                      (c) Agree to be bound by any documents you sign
+                      electronically.
+                    </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">6. Withdrawal of Consent</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    6. Withdrawal of Consent
+                  </h5>
                   <p className="mt-1">
-                    You have the right to withdraw your consent at any time by contacting Zil Money customer support.
+                    You have the right to withdraw your consent at any time by
+                    contacting Zil Money customer support.
                   </p>
                 </div>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">7. Updating Your Contact Information</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    7. Updating Your Contact Information
+                  </h5>
                   <p className="mt-1">
-                    It is your responsibility to keep your email address and other contact information up to date.
+                    It is your responsibility to keep your email address and
+                    other contact information up to date.
                   </p>
                 </div>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">8. Paper Copies</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    8. Paper Copies
+                  </h5>
                   <p className="mt-1">
-                    You may request a paper copy of any electronic document at any time by contacting customer support.
+                    You may request a paper copy of any electronic document at
+                    any time by contacting customer support.
                   </p>
                 </div>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">9. Termination</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    9. Termination
+                  </h5>
                   <p className="mt-1">
-                    This Agreement will remain in effect until terminated by either party.
+                    This Agreement will remain in effect until terminated by
+                    either party.
                   </p>
                 </div>
 
                 <div>
-                  <h5 className="font-semibold text-gray-900">10. Contact Information</h5>
+                  <h5 className="font-semibold text-gray-900">
+                    10. Contact Information
+                  </h5>
                   <div className="mt-2 ml-4">
                     <p className="font-medium">Customer Support:</p>
                     <p>Phone: (408) 775-7720</p>
-                    <p>Email: support@zilmoney.com / support@onlinecheckwriter.com</p>
+                    <p>
+                      Email: support@zilmoney.com /
+                      support@onlinecheckwriter.com
+                    </p>
                   </div>
                 </div>
 
                 <p className="pt-2">
-                  By accepting this Agreement, you affirm that you have carefully read and fully understood all the terms herein, and you hereby provide your explicit consent to conduct transactions and communications with Zil Money electronically, utilizing electronic signatures.
+                  By accepting this Agreement, you affirm that you have
+                  carefully read and fully understood all the terms herein, and
+                  you hereby provide your explicit consent to conduct
+                  transactions and communications with Zil Money electronically,
+                  utilizing electronic signatures.
                 </p>
               </div>
             </div>
@@ -271,7 +340,8 @@ export function ESignatureModal({ isOpen, onClose, onAgree }: ESignatureModalPro
                 <div className="flex items-center justify-center gap-2 text-[#F59E0B]">
                   <ArrowDown size={16} className="animate-bounce" />
                   <span className="text-sm font-medium">
-                    Please read the entire document and scroll to the bottom to agree
+                    Please read the entire document and scroll to the bottom to
+                    agree
                   </span>
                 </div>
               </div>
@@ -292,7 +362,9 @@ export function ESignatureModal({ isOpen, onClose, onAgree }: ESignatureModalPro
                 onClick={handleAgree}
                 disabled={!hasScrolledToBottom}
                 className={`flex items-center gap-2 font-bold transition-all ${
-                  !hasScrolledToBottom ? 'bg-gray-300 text-gray-500 cursor-not-allowed' : ''
+                  !hasScrolledToBottom
+                    ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                    : ""
                 }`}
               >
                 I Agree to the Terms

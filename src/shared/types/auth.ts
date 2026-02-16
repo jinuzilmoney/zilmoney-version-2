@@ -1,13 +1,13 @@
 export type SocialProvider =
-  | 'google'
-  | 'linkedin'
-  | 'microsoft'
-  | 'xero'
-  | 'amazon'
-  | 'office365'
-  | 'freshbooks'
-  | 'twitter'
-  | 'intuit';
+  | "google"
+  | "linkedin"
+  | "microsoft"
+  | "xero"
+  | "amazon"
+  | "office365"
+  | "freshbooks"
+  | "twitter"
+  | "intuit";
 
 export interface AuthUser {
   id: string;
@@ -19,7 +19,7 @@ export interface AuthUser {
   companyName: string;
   selectedFeatures: string[];
   createdAt: string;
-  provider?: SocialProvider | 'email';
+  provider?: SocialProvider | "email";
 }
 
 export interface SignUpData {

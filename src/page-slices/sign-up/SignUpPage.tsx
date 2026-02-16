@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Phone, Check } from 'lucide-react';
-import { useAuth } from '@/src/app/providers/AuthProvider';
-import { PasswordInput, TextInput, EmailInput } from '@/src/shared/ui/input';
-import { PhoneInput } from '@/src/shared/ui/phone-input';
-import { ButtonBase } from '@/src/shared/ui/button/Button';
-import { SocialLoginGrid, ESignatureModal } from '@/src/features/auth';
-import { cn } from '@/src/shared/lib/utils';
-import type { SocialProvider, SignUpData } from '@/src/shared/types/auth';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Phone, Check } from "lucide-react";
+import { useAuth } from "@/src/app/providers/AuthProvider";
+import { PasswordInput, TextInput, EmailInput } from "@/src/shared/ui/input";
+import { PhoneInput } from "@/src/shared/ui/phone-input";
+import { ButtonBase } from "@/src/shared/ui/button/Button";
+import { SocialLoginGrid, ESignatureModal } from "@/src/features/auth";
+import { cn } from "@/src/shared/lib/utils";
+import type { SocialProvider, SignUpData } from "@/src/shared/types/auth";
 
 interface FormErrors {
   name?: string;
@@ -28,13 +28,13 @@ export function SignUpPage() {
   const { signUp, socialSignIn, status } = useAuth();
 
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    password: '',
-    confirmPassword: '',
-    phone: '',
-    countryCode: '+1',
-    couponCode: '',
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    countryCode: "+1",
+    couponCode: "",
   });
 
   const [agreements, setAgreements] = useState({
@@ -49,8 +49,8 @@ export function SignUpPage() {
   const [showESignatureModal, setShowESignatureModal] = useState(false);
 
   useEffect(() => {
-    if (status === 'authenticated') {
-      router.push('/');
+    if (status === "authenticated") {
+      router.push("/");
     }
   }, [status, router]);
 
@@ -58,31 +58,32 @@ export function SignUpPage() {
     const newErrors: FormErrors = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = "Name is required";
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = "Email is required";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+      newErrors.email = "Please enter a valid email address";
     }
 
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = "Password is required";
     } else if (formData.password.length < 8) {
-      newErrors.password = 'Password must be at least 8 characters';
+      newErrors.password = "Password must be at least 8 characters";
     } else if (!/[A-Z]/.test(formData.password)) {
-      newErrors.password = 'Password must contain at least one uppercase letter';
+      newErrors.password =
+        "Password must contain at least one uppercase letter";
     } else if (!/[0-9]/.test(formData.password)) {
-      newErrors.password = 'Password must contain at least one number';
+      newErrors.password = "Password must contain at least one number";
     }
 
     if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = 'Passwords do not match';
+      newErrors.confirmPassword = "Passwords do not match";
     }
 
     if (!agreements.eSignature || !agreements.terms || !agreements.ccpa) {
-      newErrors.terms = 'Please accept all required agreements';
+      newErrors.terms = "Please accept all required agreements";
     }
 
     setErrors(newErrors);
@@ -100,29 +101,29 @@ export function SignUpPage() {
     setIsLoading(true);
 
     try {
-      const nameParts = formData.name.trim().split(' ');
-      const firstName = nameParts[0] || '';
-      const lastName = nameParts.slice(1).join(' ') || '';
+      const nameParts = formData.name.trim().split(" ");
+      const firstName = nameParts[0] || "";
+      const lastName = nameParts.slice(1).join(" ") || "";
 
       const signUpData: SignUpData = {
         firstName,
         lastName,
         email: formData.email,
-        phone: formData.phone.replace(/\D/g, ''),
+        phone: formData.phone.replace(/\D/g, ""),
         countryCode: formData.countryCode,
         password: formData.password,
-        companyName: '',
+        companyName: "",
         couponCode: formData.couponCode || undefined,
       };
 
       const result = await signUp(signUpData);
       if (result.success) {
-        router.push('/');
+        router.push("/");
       } else {
-        setSubmitError(result.error || 'Sign up failed');
+        setSubmitError(result.error || "Sign up failed");
       }
     } catch {
-      setSubmitError('An unexpected error occurred');
+      setSubmitError("An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -135,25 +136,25 @@ export function SignUpPage() {
     try {
       const result = await socialSignIn(provider);
       if (result.success) {
-        router.push('/');
+        router.push("/");
       } else {
-        setSubmitError(result.error || 'Social sign up failed');
+        setSubmitError(result.error || "Social sign up failed");
       }
     } catch {
-      setSubmitError('An unexpected error occurred');
+      setSubmitError("An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (status === 'authenticated') {
+  if (status === "authenticated") {
     return null;
   }
 
   const TRIAL_BENEFITS = [
-    'Trial Period Valid for 15 Days',
-    'No credit card required',
-    'Full features included',
+    "Trial Period Valid for 15 Days",
+    "No credit card required",
+    "Full features included",
   ];
 
   return (
@@ -234,7 +235,7 @@ export function SignUpPage() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-center text-white/90 mb-6"
           >
-            Already have an account?{' '}
+            Already have an account?{" "}
             <Link
               href="/sign-in"
               className="text-[#3BF493] hover:underline font-semibold"
@@ -250,10 +251,14 @@ export function SignUpPage() {
             transition={{ duration: 0.5, delay: 0.5 }}
             className="mt-auto pt-6 border-t border-white/20"
           >
-            <p className="text-center text-sm text-white/60 mb-4">Awards or Affiliation</p>
+            <p className="text-center text-sm text-white/60 mb-4">
+              Awards or Affiliation
+            </p>
             <div className="flex items-center justify-center gap-8">
               <div className="text-center">
-                <div className="text-sm font-semibold text-white">Rising Star</div>
+                <div className="text-sm font-semibold text-white">
+                  Rising Star
+                </div>
                 <div className="text-xs text-white/60">2017 Award</div>
               </div>
               <div className="text-center">
@@ -261,7 +266,9 @@ export function SignUpPage() {
                 <div className="text-xs text-white/60">2017 Award</div>
               </div>
               <div className="text-center">
-                <div className="text-sm font-semibold text-white">Inc. 5000</div>
+                <div className="text-sm font-semibold text-white">
+                  Inc. 5000
+                </div>
               </div>
             </div>
           </motion.div>
@@ -315,24 +322,38 @@ export function SignUpPage() {
           >
             {/* Name */}
             <div className="space-y-1.5">
-              <label htmlFor="name" className="block text-sm font-medium text-gray-700">Name</label>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Name
+              </label>
               <TextInput
                 id="name"
                 placeholder="Full Name"
                 value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, name: e.target.value })
+                }
                 error={errors.name}
               />
             </div>
 
             {/* Work Email */}
             <div className="space-y-1.5">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Work Email</label>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Work Email
+              </label>
               <EmailInput
                 id="email"
                 placeholder="email@company.com"
                 value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, email: e.target.value })
+                }
                 error={errors.email}
               />
             </div>
@@ -343,7 +364,9 @@ export function SignUpPage() {
               label="Password"
               placeholder="Create password"
               value={formData.password}
-              onChange={(value) => setFormData({ ...formData, password: value })}
+              onChange={(value) =>
+                setFormData({ ...formData, password: value })
+              }
               error={errors.password}
               showRequirements
             />
@@ -354,7 +377,9 @@ export function SignUpPage() {
               label="Confirm Password"
               placeholder="Confirm password"
               value={formData.confirmPassword}
-              onChange={(value) => setFormData({ ...formData, confirmPassword: value })}
+              onChange={(value) =>
+                setFormData({ ...formData, confirmPassword: value })
+              }
               error={errors.confirmPassword}
             />
 
@@ -365,18 +390,27 @@ export function SignUpPage() {
               value={formData.phone}
               countryCode={formData.countryCode}
               onChange={(value) => setFormData({ ...formData, phone: value })}
-              onCountryCodeChange={(code) => setFormData({ ...formData, countryCode: code })}
+              onCountryCodeChange={(code) =>
+                setFormData({ ...formData, countryCode: code })
+              }
               error={errors.phone}
             />
 
             {/* Coupon Code */}
             <div className="space-y-1.5">
-              <label htmlFor="coupon" className="block text-sm font-medium text-gray-700">Coupon Code</label>
+              <label
+                htmlFor="coupon"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Coupon Code
+              </label>
               <TextInput
                 id="coupon"
                 placeholder="Optional"
                 value={formData.couponCode}
-                onChange={(e) => setFormData({ ...formData, couponCode: e.target.value })}
+                onChange={(e) =>
+                  setFormData({ ...formData, couponCode: e.target.value })
+                }
               />
             </div>
 
@@ -386,11 +420,16 @@ export function SignUpPage() {
                 <input
                   type="checkbox"
                   checked={agreements.eSignature}
-                  onChange={(e) => setAgreements({ ...agreements, eSignature: e.target.checked })}
+                  onChange={(e) =>
+                    setAgreements({
+                      ...agreements,
+                      eSignature: e.target.checked,
+                    })
+                  }
                   className="mt-0.5 w-4 h-4 rounded border-gray-300 text-[#20319D] focus:ring-[#20319D]"
                 />
                 <span className="text-xs text-gray-600 leading-relaxed">
-                  I agree to{' '}
+                  I agree to{" "}
                   <button
                     type="button"
                     onClick={(e) => {
@@ -400,7 +439,7 @@ export function SignUpPage() {
                     className="text-[#20319D] hover:underline font-medium"
                   >
                     Zil Money&apos;s E-Signature Agreement
-                  </button>{' '}
+                  </button>{" "}
                   and consent to receive disclosures electronically.
                 </span>
               </label>
@@ -409,16 +448,41 @@ export function SignUpPage() {
                 <input
                   type="checkbox"
                   checked={agreements.terms}
-                  onChange={(e) => setAgreements({ ...agreements, terms: e.target.checked })}
+                  onChange={(e) =>
+                    setAgreements({ ...agreements, terms: e.target.checked })
+                  }
                   className="mt-0.5 w-4 h-4 rounded border-gray-300 text-[#20319D] focus:ring-[#20319D]"
                 />
                 <span className="text-xs text-gray-600 leading-relaxed">
-                  I accept{' '}
-                  <Link href="#" className="text-[#20319D] hover:underline font-medium">Terms</Link>,{' '}
-                  <Link href="#" className="text-[#20319D] hover:underline font-medium">Privacy Policy</Link>,{' '}
-                  <Link href="#" className="text-[#20319D] hover:underline font-medium">USA PATRIOT Act</Link>{' '}
-                  compliance, and{' '}
-                  <Link href="#" className="text-[#20319D] hover:underline font-medium">Communication Policy</Link>.
+                  I accept{" "}
+                  <Link
+                    href="#"
+                    className="text-[#20319D] hover:underline font-medium"
+                  >
+                    Terms
+                  </Link>
+                  ,{" "}
+                  <Link
+                    href="#"
+                    className="text-[#20319D] hover:underline font-medium"
+                  >
+                    Privacy Policy
+                  </Link>
+                  ,{" "}
+                  <Link
+                    href="#"
+                    className="text-[#20319D] hover:underline font-medium"
+                  >
+                    USA PATRIOT Act
+                  </Link>{" "}
+                  compliance, and{" "}
+                  <Link
+                    href="#"
+                    className="text-[#20319D] hover:underline font-medium"
+                  >
+                    Communication Policy
+                  </Link>
+                  .
                 </span>
               </label>
 
@@ -426,17 +490,26 @@ export function SignUpPage() {
                 <input
                   type="checkbox"
                   checked={agreements.ccpa}
-                  onChange={(e) => setAgreements({ ...agreements, ccpa: e.target.checked })}
+                  onChange={(e) =>
+                    setAgreements({ ...agreements, ccpa: e.target.checked })
+                  }
                   className="mt-0.5 w-4 h-4 rounded border-gray-300 text-[#20319D] focus:ring-[#20319D]"
                 />
                 <span className="text-xs text-gray-600 leading-relaxed">
-                  I acknowledge my{' '}
-                  <Link href="#" className="text-[#20319D] hover:underline font-medium">CCPA</Link>{' '}
+                  I acknowledge my{" "}
+                  <Link
+                    href="#"
+                    className="text-[#20319D] hover:underline font-medium"
+                  >
+                    CCPA
+                  </Link>{" "}
                   rights to access, delete, and opt-out of data sales.
                 </span>
               </label>
 
-              {errors.terms && <p className="text-xs text-red-500">{errors.terms}</p>}
+              {errors.terms && (
+                <p className="text-xs text-red-500">{errors.terms}</p>
+              )}
             </div>
 
             {/* Submit Button */}
@@ -446,26 +519,38 @@ export function SignUpPage() {
               size="lg"
               disabled={isLoading}
               className={cn(
-                'w-full font-bold text-[#20319D]',
-                isLoading && 'opacity-70 cursor-not-allowed'
+                "w-full font-bold text-[#20319D]",
+                isLoading && "opacity-70 cursor-not-allowed",
               )}
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
                   </svg>
                   Creating Account...
                 </span>
               ) : (
-                'Sign Up'
+                "Sign Up"
               )}
             </ButtonBase>
 
             {/* Sign In Link (mobile) */}
             <p className="text-center text-gray-600 mt-4 lg:hidden">
-              Already have an account?{' '}
+              Already have an account?{" "}
               <Link
                 href="/sign-in"
                 className="text-[#20319D] hover:underline font-semibold"

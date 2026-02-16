@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { TextInput, TextArea, NumberInput, EmailInput, PasswordInput, Dropdown } from "@/src/shared/ui/input";
+import {
+  TextInput,
+  TextArea,
+  NumberInput,
+  EmailInput,
+  PasswordInput,
+  Dropdown,
+} from "@/src/shared/ui/input";
 
 export function InputFieldsShowcase() {
   const [password, setPassword] = useState("");
@@ -23,7 +30,6 @@ export function InputFieldsShowcase() {
           { label: "Income", value: "income" },
           { label: "Expense", value: "expense" },
         ]}
-
       />
     </div>
   );

@@ -1,14 +1,10 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { Sidebar } from '@/src/widgets/sidebar';
-import { Header } from '@/src/widgets/header';
+import { useState } from "react";
+import { Sidebar } from "@/src/widgets/sidebar";
+import { Header } from "@/src/widgets/header";
 
-export default function AppLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function AppLayout({ children }: { children: React.ReactNode }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 

@@ -1,4 +1,4 @@
-export type CompanyStatus = 'owned' | 'invited' | 'requested';
+export type CompanyStatus = "owned" | "invited" | "requested";
 
 export interface Company {
   id: string;

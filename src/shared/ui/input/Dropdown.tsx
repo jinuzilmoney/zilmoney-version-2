@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { ChevronDown, Check } from "lucide-react";
+import { cn } from "@/src/shared/lib";
 
 export interface DropdownOption {
   label: string;
@@ -20,7 +21,7 @@ export interface DropdownProps {
 }
 
 export function Dropdown({
-  className = "",
+  className,
   error,
   options,
   placeholder,
@@ -33,13 +34,17 @@ export function Dropdown({
   const [internalValue, setInternalValue] = useState(defaultValue ?? "");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const selectedValue = controlledValue !== undefined ? controlledValue : internalValue;
+  const selectedValue =
+    controlledValue !== undefined ? controlledValue : internalValue;
   const selectedOption = options.find((o) => o.value === selectedValue);
 
   // Close on click outside
   useEffect(() => {
     function handleClick(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(e.target as Node)
+      ) {
         setIsOpen(false);
       }
     }
@@ -74,25 +79,39 @@ export function Dropdown({
           type="button"
           onClick={() => !disabled && setIsOpen((prev) => !prev)}
           disabled={disabled}
-          className={`flex h-11 min-h-[44px] w-full items-center justify-between rounded-xl border ${
-            error ? "border-red-500" : isOpen ? "border-[#20319D] ring-2 ring-[#20319D] ring-offset-1" : "border-gray-200"
-          } bg-white px-4 py-3 text-base shadow-sm transition-all duration-200 hover:border-gray-300 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm md:py-2 ${className}`}
+          className={cn(
+            "flex h-11 min-h-[44px] w-full items-center justify-between rounded-xl border bg-card px-4 py-3 text-base shadow-sm transition-all duration-200",
+            "hover:border-muted-foreground/30 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm md:py-2",
+            error
+              ? "border-destructive"
+              : isOpen
+                ? "border-ring ring-2 ring-ring ring-offset-1"
+                : "border-input",
+            className,
+          )}
         >
-          <span className={selectedOption ? "text-gray-900" : "text-gray-400"}>
-            {selectedOption ? selectedOption.label : placeholder ?? "Select..."}
+          <span
+            className={selectedOption ? "text-foreground" : "text-placeholder"}
+          >
+            {selectedOption
+              ? selectedOption.label
+              : (placeholder ?? "Select...")}
           </span>
           <ChevronDown
             size={16}
-            className={`text-gray-500 transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
+            className={cn(
+              "text-muted-foreground transition-transform duration-200",
+              isOpen && "rotate-180",
+            )}
           />
         </button>
 
         {/* Options List */}
         {isOpen && (
-          <div className="absolute left-0 top-full z-50 mt-1 w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg">
+          <div className="absolute left-0 top-full z-50 mt-1 w-full overflow-hidden rounded-xl border border-border bg-popover shadow-lg">
             <div className="max-h-60 overflow-y-auto py-1">
               {placeholder && (
-                <div className="px-4 py-2.5 text-sm text-gray-400 border-b border-gray-100 cursor-default">
+                <div className="px-4 py-2.5 text-sm text-placeholder border-b border-border cursor-default">
                   {placeholder}
                 </div>
               )}
@@ -103,14 +122,15 @@ export function Dropdown({
                     key={option.value}
                     type="button"
                     onClick={() => handleSelect(option.value)}
-                    className={`flex w-full items-center justify-between px-4 py-2.5 text-left text-sm transition-colors ${
+                    className={cn(
+                      "flex w-full items-center justify-between px-4 py-2.5 text-left text-sm transition-colors",
                       isSelected
-                        ? "bg-[#20319D]/10 text-[#20319D] font-medium"
-                        : "text-gray-900 hover:bg-[#20319D]/5"
-                    }`}
+                        ? "bg-primary/10 text-primary font-medium"
+                        : "text-foreground hover:bg-primary/5",
+                    )}
                   >
                     {option.label}
-                    {isSelected && <Check size={16} className="text-[#20319D]" />}
+                    {isSelected && <Check size={16} className="text-primary" />}
                   </button>
                 );
               })}
@@ -118,7 +138,7 @@ export function Dropdown({
           </div>
         )}
       </div>
-      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+      {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
     </div>
   );
 }

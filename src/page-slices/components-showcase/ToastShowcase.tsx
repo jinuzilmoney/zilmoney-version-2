@@ -1,7 +1,7 @@
 "use client";
 
 import { useToast } from "@/src/shared/ui/toast";
-import { PrimaryButton,SecondaryButton } from "@/src/shared/ui/button";
+import { PrimaryButton, SecondaryButton } from "@/src/shared/ui/button";
 
 export function ToastShowcase() {
   const { success, error, warning, info } = useToast();
@@ -13,9 +13,7 @@ export function ToastShowcase() {
       >
         Success
       </PrimaryButton>
-      <SecondaryButton
-        onClick={() => error("Error", "Something went wrong!")}
-      >
+      <SecondaryButton onClick={() => error("Error", "Something went wrong!")}>
         Error
       </SecondaryButton>
       <SecondaryButton

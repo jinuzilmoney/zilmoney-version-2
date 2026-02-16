@@ -25,28 +25,28 @@ const toastStyles: Record<
   { bg: string; border: string; icon: string; iconBg: string }
 > = {
   error: {
-    bg: "bg-red-50",
-    border: "border-red-200",
-    icon: "text-red-600",
-    iconBg: "bg-red-100",
+    bg: "bg-red-50 dark:bg-red-950/50",
+    border: "border-red-200 dark:border-red-800",
+    icon: "text-red-600 dark:text-red-400",
+    iconBg: "bg-red-100 dark:bg-red-900/50",
   },
   warning: {
-    bg: "bg-yellow-50",
-    border: "border-yellow-200",
-    icon: "text-yellow-600",
-    iconBg: "bg-yellow-100",
+    bg: "bg-yellow-50 dark:bg-yellow-950/50",
+    border: "border-yellow-200 dark:border-yellow-800",
+    icon: "text-yellow-600 dark:text-yellow-400",
+    iconBg: "bg-yellow-100 dark:bg-yellow-900/50",
   },
   info: {
-    bg: "bg-blue-50",
-    border: "border-blue-200",
-    icon: "text-blue-600",
-    iconBg: "bg-blue-100",
+    bg: "bg-blue-50 dark:bg-blue-950/50",
+    border: "border-blue-200 dark:border-blue-800",
+    icon: "text-blue-600 dark:text-blue-400",
+    iconBg: "bg-blue-100 dark:bg-blue-900/50",
   },
   success: {
-    bg: "bg-green-50",
-    border: "border-green-200",
-    icon: "text-green-600",
-    iconBg: "bg-green-100",
+    bg: "bg-green-50 dark:bg-green-950/50",
+    border: "border-green-200 dark:border-green-800",
+    icon: "text-green-600 dark:text-green-400",
+    iconBg: "bg-green-100 dark:bg-green-900/50",
   },
 };
 
@@ -98,9 +98,9 @@ export function Toast({
 
       {/* Content */}
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-gray-900">{title}</p>
+        <p className="text-sm font-semibold text-foreground">{title}</p>
         {description && (
-          <p className="mt-1 text-xs text-gray-600 leading-relaxed">
+          <p className="mt-1 text-xs text-muted-foreground leading-relaxed">
             {description}
           </p>
         )}
@@ -118,10 +118,10 @@ export function Toast({
       {dismissible && onDismiss && (
         <button
           onClick={() => onDismiss(id)}
-          className="flex-shrink-0 p-1 rounded-lg hover:bg-black/5 transition-colors"
+          className="flex-shrink-0 p-1 rounded-lg hover:bg-foreground/5 transition-colors"
           aria-label="Dismiss notification"
         >
-          <X size={16} className="text-gray-500" />
+          <X size={16} className="text-muted-foreground" />
         </button>
       )}
     </div>

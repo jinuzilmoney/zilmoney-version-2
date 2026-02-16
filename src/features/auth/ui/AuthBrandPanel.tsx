@@ -1,40 +1,40 @@
-'use client';
+"use client";
 
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Check, Shield, CreditCard, Globe, FileText } from 'lucide-react';
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Check, Shield, CreditCard, Globe, FileText } from "lucide-react";
 
 interface AuthBrandPanelProps {
-  variant?: 'signin' | 'signup';
+  variant?: "signin" | "signup";
 }
 
 const FEATURES = {
   signin: [
-    { icon: CreditCard, text: 'Send & receive payments instantly' },
-    { icon: Globe, text: 'International wire transfers' },
-    { icon: FileText, text: 'Invoice management & tracking' },
-    { icon: Shield, text: 'Bank-level security' },
+    { icon: CreditCard, text: "Send & receive payments instantly" },
+    { icon: Globe, text: "International wire transfers" },
+    { icon: FileText, text: "Invoice management & tracking" },
+    { icon: Shield, text: "Bank-level security" },
   ],
   signup: [
-    { icon: Check, text: 'Trial Period Valid for 15 Days' },
-    { icon: Check, text: 'No credit card required' },
-    { icon: Check, text: 'Full features included' },
-    { icon: Check, text: 'Cancel anytime' },
+    { icon: Check, text: "Trial Period Valid for 15 Days" },
+    { icon: Check, text: "No credit card required" },
+    { icon: Check, text: "Full features included" },
+    { icon: Check, text: "Cancel anytime" },
   ],
 };
 
 const HEADLINES = {
   signin: {
-    title: 'Welcome Back',
-    subtitle: 'All-in-One Payments, Tailored for Your Business',
+    title: "Welcome Back",
+    subtitle: "All-in-One Payments, Tailored for Your Business",
   },
   signup: {
-    title: 'Start Your Free Trial',
-    subtitle: 'Join over 1 million businesses using Zilmoney',
+    title: "Start Your Free Trial",
+    subtitle: "Join over 1 million businesses using Zilmoney",
   },
 };
 
-export function AuthBrandPanel({ variant = 'signin' }: AuthBrandPanelProps) {
+export function AuthBrandPanel({ variant = "signin" }: AuthBrandPanelProps) {
   const features = FEATURES[variant];
   const headline = HEADLINES[variant];
 
@@ -67,9 +67,7 @@ export function AuthBrandPanel({ variant = 'signin' }: AuthBrandPanelProps) {
           <h2 className="text-3xl lg:text-4xl font-bold text-white mb-3">
             {headline.title}
           </h2>
-          <p className="text-lg text-white/80">
-            {headline.subtitle}
-          </p>
+          <p className="text-lg text-white/80">{headline.subtitle}</p>
         </motion.div>
 
         {/* Features */}

@@ -87,7 +87,7 @@ export function ToastContainer({
 
       return id;
     },
-    [defaultDuration, dismiss]
+    [defaultDuration, dismiss],
   );
 
   const contextValue: ToastContextValue = {
@@ -147,9 +147,9 @@ export function useToast() {
       description?: string,
       options?: Partial<
         Omit<ToastItem, "id" | "type" | "title" | "description">
-      >
+      >,
     ) => toast({ type: "error", title, description, ...options }),
-    [toast]
+    [toast],
   );
 
   const warning = useCallback(
@@ -158,9 +158,9 @@ export function useToast() {
       description?: string,
       options?: Partial<
         Omit<ToastItem, "id" | "type" | "title" | "description">
-      >
+      >,
     ) => toast({ type: "warning", title, description, ...options }),
-    [toast]
+    [toast],
   );
 
   const info = useCallback(
@@ -169,9 +169,9 @@ export function useToast() {
       description?: string,
       options?: Partial<
         Omit<ToastItem, "id" | "type" | "title" | "description">
-      >
+      >,
     ) => toast({ type: "info", title, description, ...options }),
-    [toast]
+    [toast],
   );
 
   const success = useCallback(
@@ -180,9 +180,9 @@ export function useToast() {
       description?: string,
       options?: Partial<
         Omit<ToastItem, "id" | "type" | "title" | "description">
-      >
+      >,
     ) => toast({ type: "success", title, description, ...options }),
-    [toast]
+    [toast],
   );
 
   return {

@@ -1,31 +1,31 @@
-'use client';
+"use client";
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { Phone } from 'lucide-react';
-import { useAuth } from '@/src/app/providers/AuthProvider';
-import { PasswordInput, EmailInput } from '@/src/shared/ui/input';
-import { ButtonBase } from '@/src/shared/ui/button/Button';
-import { SocialLoginGrid, AuthBrandPanel } from '@/src/features/auth';
-import { cn } from '@/src/shared/lib/utils';
-import type { SocialProvider } from '@/src/shared/types/auth';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Phone } from "lucide-react";
+import { useAuth } from "@/src/app/providers/AuthProvider";
+import { PasswordInput, EmailInput } from "@/src/shared/ui/input";
+import { ButtonBase } from "@/src/shared/ui/button/Button";
+import { SocialLoginGrid, AuthBrandPanel } from "@/src/features/auth";
+import { cn } from "@/src/shared/lib/utils";
+import type { SocialProvider } from "@/src/shared/types/auth";
 
 export function SignInPage() {
   const router = useRouter();
   const { signIn, socialSignIn, status } = useAuth();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (status === 'authenticated') {
-      router.push('/');
+    if (status === "authenticated") {
+      router.push("/");
     }
   }, [status, router]);
 
@@ -37,12 +37,12 @@ export function SignInPage() {
     try {
       const result = await signIn(email, password, rememberMe);
       if (result.success) {
-        router.push('/');
+        router.push("/");
       } else {
-        setError(result.error || 'Sign in failed');
+        setError(result.error || "Sign in failed");
       }
     } catch {
-      setError('An unexpected error occurred');
+      setError("An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }
@@ -55,18 +55,18 @@ export function SignInPage() {
     try {
       const result = await socialSignIn(provider);
       if (result.success) {
-        router.push('/');
+        router.push("/");
       } else {
-        setError(result.error || 'Social sign in failed');
+        setError(result.error || "Social sign in failed");
       }
     } catch {
-      setError('An unexpected error occurred');
+      setError("An unexpected error occurred");
     } finally {
       setIsLoading(false);
     }
   };
 
-  if (status === 'authenticated') {
+  if (status === "authenticated") {
     return null;
   }
 
@@ -105,9 +105,7 @@ export function SignInPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="mb-8"
           >
-            <h1 className="text-3xl font-bold text-gray-900">
-              Sign In
-            </h1>
+            <h1 className="text-3xl font-bold text-gray-900">Sign In</h1>
           </motion.div>
 
           {/* Form */}
@@ -131,7 +129,12 @@ export function SignInPage() {
 
             {/* Email */}
             <div className="space-y-2">
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Email Address
+              </label>
               <EmailInput
                 id="email"
                 placeholder="email@company.com"
@@ -176,20 +179,32 @@ export function SignInPage() {
               size="lg"
               disabled={isLoading || !email || !password}
               className={cn(
-                'w-full font-bold',
-                isLoading && 'opacity-70 cursor-not-allowed'
+                "w-full font-bold",
+                isLoading && "opacity-70 cursor-not-allowed",
               )}
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
                   <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                      fill="none"
+                    />
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                    />
                   </svg>
                   Signing In...
                 </span>
               ) : (
-                'Sign In'
+                "Sign In"
               )}
             </ButtonBase>
           </motion.form>
@@ -215,7 +230,7 @@ export function SignInPage() {
             transition={{ duration: 0.5, delay: 0.4 }}
             className="mt-6 text-center text-gray-600"
           >
-            Don&apos;t have an account yet?{' '}
+            Don&apos;t have an account yet?{" "}
             <Link
               href="/sign-up"
               className="text-[#20319D] hover:underline font-semibold"
