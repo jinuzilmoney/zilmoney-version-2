@@ -19,7 +19,10 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Zilmoney",
+  title: {
+    default: "Zilmoney",
+    template: "%s | Zilmoney",
+  },
   description: "All-In-One B2B Payment Platform That Handles All Your Business Transactions with Ease and in Less Time.",
 };
 
