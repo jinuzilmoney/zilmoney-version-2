@@ -1,1 +1,224 @@
 @import "tailwindcss";
+
+/* ============================================
+   LIGHT MODE (default)
+   ============================================ */
+:root {
+  /* Zilmoney Brand Colors */
+  --brand-neon-green: rgb(59 244 147);
+  --brand-royal-blue: rgb(32 49 157);
+  --brand-midnight-violet: rgb(46 0 86);
+  --brand-vivid-violet: rgb(121 36 255);
+  --brand-sky-blue: rgb(5 149 229);
+  --brand-soft-silver: rgb(234 234 234);
+
+  /* Primary from brand */
+  --primary: rgb(32 49 157);
+  --primary-foreground: hsl(0 0% 100%);
+  --primary-neon: rgb(59 244 147);
+
+  /* Secondary from brand */
+  --secondary: rgb(234 234 234);
+  --secondary-foreground: hsl(0 0% 15%);
+  --secondary-violet: rgb(121 36 255);
+  --secondary-sky: rgb(5 149 229);
+  --secondary-midnight: rgb(46 0 86);
+
+  /* Core UI Colors - Light Mode */
+  --background: hsl(0 0% 98%);
+  --foreground: hsl(222.2 84% 4.9%);
+  --card: hsl(0 0% 100%);
+  --card-foreground: hsl(222.2 84% 4.9%);
+  --popover: hsl(0 0% 100%);
+  --popover-foreground: hsl(222.2 84% 4.9%);
+  --muted: hsl(210 40% 96.1%);
+  --muted-foreground: hsl(215.4 16.3% 46.9%);
+  --accent: hsl(210 40% 96.1%);
+  --accent-foreground: hsl(222.2 47.4% 11.2%);
+  --destructive: hsl(0 84.2% 60.2%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --border: hsl(214.3 31.8% 91.4%);
+  --input: hsl(214.3 31.8% 91.4%);
+  --ring: hsl(225 61% 40%);
+
+  /* Border Radius */
+  --ui-radius: 0.75rem;
+
+  /* Status Colors - Light Mode */
+  --success: hsl(142 76% 36%);
+  --success-foreground: hsl(143 64% 24%);
+  --warning: hsl(38 92% 50%);
+  --warning-foreground: hsl(32 81% 29%);
+  --info: hsl(217 91% 60%);
+  --info-foreground: hsl(224 76% 48%);
+  --violet: hsl(271 81% 56%);
+  --violet-foreground: hsl(271 81% 30%);
+
+  /* Additional Semantic Colors */
+  --placeholder: hsl(215 16% 47%);
+  --surface: hsl(0 0% 100%);
+  --panel: hsl(210 40% 98%);
+  --hover: hsl(210 40% 96%);
+  --active: hsl(210 40% 94%);
+
+  /* Hover state colors */
+  --primary-dark: #1a2780;
+  --primary-neon-light: #2ee082;
+}
+
+/* ============================================
+   DARK MODE (class-based)
+   ============================================ */
+.dark {
+  /* Zilmoney Brand Colors - Same in both modes */
+  --brand-neon-green: rgb(59 244 147);
+  --brand-royal-blue: rgb(32 49 157);
+  --brand-midnight-violet: rgb(46 0 86);
+  --brand-vivid-violet: rgb(121 36 255);
+  --brand-sky-blue: rgb(5 149 229);
+  --brand-soft-silver: rgb(234 234 234);
+
+  /* Primary - brighter blue for visibility */
+  --primary: hsl(225 61% 55%);
+  --primary-foreground: hsl(0 0% 100%);
+  --primary-neon: rgb(59 244 147);
+
+  /* Secondary */
+  --secondary: hsl(217.2 32.6% 25%);
+  --secondary-foreground: hsl(210 40% 98%);
+  --secondary-violet: rgb(121 36 255);
+  --secondary-sky: rgb(5 149 229);
+  --secondary-midnight: rgb(46 0 86);
+
+  /* Core UI Colors - Dark Mode */
+  --background: hsl(222.2 47.4% 11.2%);
+  --foreground: hsl(210 40% 98%);
+  --card: hsl(217.2 32.6% 17.5%);
+  --card-foreground: hsl(210 40% 98%);
+  --popover: hsl(217.2 32.6% 17.5%);
+  --popover-foreground: hsl(210 40% 98%);
+  --muted: hsl(217.2 32.6% 25%);
+  --muted-foreground: hsl(215 20.2% 65.1%);
+  --accent: hsl(217.2 32.6% 25%);
+  --accent-foreground: hsl(210 40% 98%);
+  --destructive: hsl(0 62.8% 50.6%);
+  --destructive-foreground: hsl(0 0% 98%);
+  --border: hsl(217.2 32.6% 25%);
+  --input: hsl(217.2 32.6% 25%);
+  --ring: hsl(225 61% 55%);
+
+  /* Border Radius */
+  --ui-radius: 0.75rem;
+
+  /* Status Colors - Dark Mode */
+  --success: hsl(142 69% 45%);
+  --success-foreground: hsl(142 69% 58%);
+  --warning: hsl(38 92% 50%);
+  --warning-foreground: hsl(45 93% 58%);
+  --info: hsl(217 91% 65%);
+  --info-foreground: hsl(214 93% 71%);
+  --violet: hsl(271 81% 65%);
+  --violet-foreground: hsl(271 91% 78%);
+
+  /* Additional Semantic Colors */
+  --placeholder: hsl(215 20.2% 50%);
+  --surface: hsl(222.2 47.4% 11.2%);
+  --panel: hsl(217.2 32.6% 17.5%);
+  --hover: hsl(217.2 32.6% 22%);
+  --active: hsl(217.2 32.6% 20%);
+
+  /* Hover state colors */
+  --primary-dark: #5570cc;
+  --primary-neon-light: #6bfaaf;
+}
+
+/* ============================================
+   Tailwind v4 Design Token Bridge
+   ============================================ */
+@theme inline {
+  /* Font families */
+  --font-funnel: var(--font-funnel), sans-serif;
+  --font-peridot: var(--font-peridot), sans-serif;
+
+  /* Brand Colors */
+  --color-brand-neon-green: var(--brand-neon-green);
+  --color-brand-royal-blue: var(--brand-royal-blue);
+  --color-brand-midnight-violet: var(--brand-midnight-violet);
+  --color-brand-vivid-violet: var(--brand-vivid-violet);
+  --color-brand-sky-blue: var(--brand-sky-blue);
+  --color-brand-soft-silver: var(--brand-soft-silver);
+
+  /* Primary */
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-neon: var(--primary-neon);
+
+  /* Secondary */
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-violet: var(--secondary-violet);
+  --color-secondary-sky: var(--secondary-sky);
+  --color-secondary-midnight: var(--secondary-midnight);
+
+  /* Core UI */
+  --color-main-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Status */
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-violet: var(--violet);
+  --color-violet-foreground: var(--violet-foreground);
+
+  /* Semantic */
+  --color-placeholder: var(--placeholder);
+  --color-surface: var(--surface);
+  --color-panel: var(--panel);
+  --color-hover: var(--hover);
+  --color-active: var(--active);
+
+  /* Hover States */
+  --color-primary-dark: var(--primary-dark);
+  --color-primary-neon-light: var(--primary-neon-light);
+
+  /* Border Radius */
+  --radius-lg: var(--ui-radius);
+  --radius-md: calc(var(--ui-radius) - 2px);
+  --radius-sm: calc(var(--ui-radius) - 4px);
+}
+
+/* ============================================
+   Base Styles
+   ============================================ */
+@layer base {
+  * {
+    @apply border-border;
+    font-family: "Plus Jakarta Sans", var(--font-peridot), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-funnel), -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+}

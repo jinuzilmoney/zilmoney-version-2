@@ -5,12 +5,8 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'glass' | 'outli
 export type ButtonSize = 'sm' | 'md' | 'lg' | 'icon';
 
 
-import { type ClassValue, clsx } from "clsx"
-import { twMerge } from "tailwind-merge"
+import { cn } from "@/src/shared/lib";
 
- function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
 export interface ButtonBaseProps {
   size?: ButtonSize;
   children?: React.ReactNode;
@@ -27,19 +23,19 @@ interface InternalButtonProps extends ButtonBaseProps {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary:
-    'bg-[#20319D] text-[#3BF493] shadow-md hover:shadow-lg hover:bg-[#1a2780] disabled:opacity-50 disabled:cursor-not-allowed border border-[#20319D]/10',
+    'bg-primary text-primary-neon shadow-md hover:shadow-lg hover:bg-primary-dark disabled:opacity-50 disabled:cursor-not-allowed border border-primary/10',
   secondary:
-    'bg-white dark:bg-slate-800 text-gray-900 dark:text-slate-100 shadow-sm hover:shadow-md border border-gray-200 dark:border-slate-700 hover:bg-gray-50 dark:hover:bg-slate-700 disabled:opacity-50 disabled:cursor-not-allowed',
+    'bg-card text-card-foreground shadow-sm hover:shadow-md border border-border hover:bg-hover disabled:opacity-50 disabled:cursor-not-allowed',
   ghost:
-    'bg-transparent hover:bg-gray-100/80 dark:hover:bg-slate-700/80 text-gray-700 dark:text-slate-300 hover:text-gray-900 dark:hover:text-slate-100 disabled:opacity-50 disabled:cursor-not-allowed',
+    'bg-transparent hover:bg-hover text-muted-foreground hover:text-foreground disabled:opacity-50 disabled:cursor-not-allowed',
   glass:
-    'glass text-gray-900 dark:text-slate-100 hover:bg-white/60 dark:hover:bg-slate-700/60 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed',
+    'glass text-foreground hover:bg-hover/60 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed',
   outline:
-    'bg-transparent border-2 border-[#20319D] text-[#20319D] dark:text-[#6B8AFF] dark:border-[#6B8AFF] hover:bg-[#20319D]/10 dark:hover:bg-[#6B8AFF]/10 disabled:opacity-50 disabled:cursor-not-allowed',
+    'bg-transparent border-2 border-primary text-primary hover:bg-primary/10 disabled:opacity-50 disabled:cursor-not-allowed',
   destructive:
-    'bg-red-500 text-white shadow-md hover:shadow-lg hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed',
+    'bg-destructive text-destructive-foreground shadow-md hover:shadow-lg hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed',
   neon:
-    'bg-[#3BF493] text-gray-900 shadow-md hover:shadow-lg hover:bg-[#2de07d] disabled:opacity-50 disabled:cursor-not-allowed',
+    'bg-primary-neon text-foreground shadow-md hover:shadow-lg hover:bg-primary-neon-light disabled:opacity-50 disabled:cursor-not-allowed',
 };
 
 const sizeStyles: Record<ButtonSize, string> = {
@@ -56,7 +52,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, InternalButtonProps>(
         ref={ref}
         disabled={disabled}
         className={cn(
-          'relative inline-flex items-center justify-center gap-2 font-medium cursor-pointer transition-all duration-200 overflow-hidden whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20319D] dark:focus-visible:ring-[#6B8AFF] focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900',
+          'relative inline-flex items-center justify-center gap-2 font-medium cursor-pointer transition-all duration-200 overflow-hidden whitespace-nowrap focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-main-background',
           variantStyles[variant],
           sizeStyles[size],
           className
@@ -71,7 +67,7 @@ export const ButtonBase = forwardRef<HTMLButtonElement, InternalButtonProps>(
       return (
         <div className="relative group/tooltip inline-flex">
           {button}
-          <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-gray-900 dark:bg-slate-700 px-2.5 py-1 text-xs text-white opacity-0 transition-opacity group-hover/tooltip:opacity-100 z-50">
+          <span className="pointer-events-none absolute -top-9 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2.5 py-1 text-xs text-main-background opacity-0 transition-opacity group-hover/tooltip:opacity-100 z-50">
             {tooltip}
           </span>
         </div>

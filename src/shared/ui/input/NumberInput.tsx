@@ -1,12 +1,13 @@
 "use client";
 
 import React from "react";
+import { cn } from "@/src/shared/lib";
 
 export interface NumberInputProps extends React.ComponentProps<"input"> {
   error?: string;
 }
 
-export function NumberInput({ className = "", error, onWheel, ...props }: NumberInputProps) {
+export function NumberInput({ className, error, onWheel, ...props }: NumberInputProps) {
   return (
     <div className="w-full">
       <input
@@ -21,10 +22,18 @@ export function NumberInput({ className = "", error, onWheel, ...props }: Number
           }
           props.onKeyDown?.(e);
         }}
-        className={`flex h-11 min-h-[44px] w-full rounded-xl border ${error ? "border-red-500" : "border-gray-200"} bg-white px-4 py-3 text-base text-gray-900 shadow-sm transition-all duration-200 placeholder:text-gray-400 hover:border-gray-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#20319D] focus-visible:ring-offset-1 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm md:py-2 [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield] ${className}`}
+        className={cn(
+          "flex h-11 min-h-[44px] w-full rounded-xl border bg-card px-4 py-3 text-base text-foreground shadow-sm transition-all duration-200",
+          "placeholder:text-placeholder hover:border-muted-foreground/30",
+          "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1",
+          "disabled:cursor-not-allowed disabled:opacity-50 md:text-sm md:py-2",
+          "[&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none [-moz-appearance:textfield]",
+          error ? "border-destructive" : "border-input",
+          className
+        )}
         {...props}
       />
-      {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+      {error && <p className="mt-1 text-xs text-destructive">{error}</p>}
     </div>
   );
 }

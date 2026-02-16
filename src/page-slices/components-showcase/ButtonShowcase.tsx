@@ -14,7 +14,7 @@ export default function ButtonShowcase() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-sm font-medium text-gray-500 mb-3">Variants</h3>
+        <h3 className="text-sm font-medium text-muted-foreground mb-3">Variants</h3>
         <div className="flex flex-wrap gap-3">
           <PrimaryButton tooltip="Primary action" onClick={() => alert('Primary clicked')}>primary</PrimaryButton>
           <SecondaryButton tooltip="Secondary action" onClick={() => alert('Secondary clicked')}>secondary</SecondaryButton>
@@ -27,7 +27,7 @@ export default function ButtonShowcase() {
       </div>
 
       <div>
-        <h3 className="text-sm font-medium text-gray-500 mb-3">Sizes</h3>
+        <h3 className="text-sm font-medium text-muted-foreground mb-3">Sizes</h3>
         <div className="flex flex-wrap items-center gap-3">
           <PrimaryButton size="sm" tooltip="Small button">Size sm</PrimaryButton>
           <PrimaryButton size="md" tooltip="Medium button">Size md</PrimaryButton>
